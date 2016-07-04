@@ -26,7 +26,8 @@
     </head>
 
     <body>
-        @yield('body')
+    @yield('body')
+	@yield('errors')
 
         <footer>
             @yield('footer')

@@ -33,19 +33,12 @@ $(document).ready(function() {
     });
 
     $('#deleteEmployee').click(function() {
+        var name = $('h3.panel-title').text();
         BootstrapDialog.show({
-            message: 'Hi Apple!',
+            message: 'Are you sure you want to delete ' + name + '?',
             buttons: [{
-                label: 'Button 1'
-            }, {
-                label: 'Button 2',
-                cssClass: 'btn-primary',
-                action: function(){
-                    alert('Hi Orange!');
-                }
-            }, {
                 icon: 'glyphicon glyphicon-ban-circle',
-                label: 'Button 3',
+                label: 'Delete',
                 cssClass: 'btn-warning'
             }, {
                 label: 'Close',
@@ -55,4 +48,13 @@ $(document).ready(function() {
             }]
         });
     })
+
+    $(function() {
+        $('#datetimepicker4').datetimepicker({
+            pickTime: false
+        });
+        $('#datetimepicker5').datetimepicker({
+            pickTime: false
+        });
+    });
 });

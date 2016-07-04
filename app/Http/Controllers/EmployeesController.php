@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Employee;
+use App\Http\Requests\EmployeeRequest;
 
 class EmployeesController extends Controller
 {
@@ -37,7 +38,7 @@ class EmployeesController extends Controller
         $salaries = $employee->salaries;
         $method = 'view';
 
-        return view('profile', compact('employee', 'titles', 'department', 'salaries', 'method'));
+        return view('view_profile', compact('employee', 'titles', 'department', 'salaries', 'method'));
     }
 
     public function edit($id)
@@ -49,9 +50,27 @@ class EmployeesController extends Controller
             $query->orderBy('to_date', 'DESC');
         }]);
         $salaries = $employee->salaries;
-        $method = 'view';
+        $method = 'edit';
 
-        return view('profile', compact('employee', 'titles', 'department', 'salaries', 'method'));
+        return view('edit_profile', compact('employee', 'titles', 'department', 'salaries', 'method'));
+    }
+
+    public function destroy($id)
+    {
+        $employee = Employee::findOrFail($id);
+        return 'Delete inacted';
+    }
+
+    public function update(EmployeeRequest $request, $id)
+    {
+        $employee = Employee::findOrFail($id);
+        $name = $employee->first_name . " " . $employee->last_name;
+        $employee->save($request->all());
+        return redirect("employees/{$employee->emp_no}")->with(
+            [
+                'flash_message'   => "{$name} profile has been updated."
+            ]
+        );
     }
 
     private function getColumnsForTable()

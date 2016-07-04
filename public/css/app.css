@@ -32,3 +32,13 @@
 {margin-top:20px;
 }
 
+#errors {
+    width: 300px;
+    margin: 0 auto;
+}
+
+#flash {
+    width: 500px;
+    margin: 0 auto;
+    margin-top: 30px;
+}
